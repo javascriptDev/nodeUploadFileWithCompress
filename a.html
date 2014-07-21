@@ -40,6 +40,7 @@
                 var bytes = Array.prototype.map.call(string, function (c) {
                     return c.charCodeAt(0) & 0xff;
                 });
+                debugger;
                 this.send(new Uint8Array(bytes).buffer);
             };
         }
@@ -50,9 +51,8 @@
 
         var xhr = new XMLHttpRequest();
         xhr.open('POST', upload_url, true);
-        var boundary = 'someboundary';
 
-        xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + boundary);
+        xhr.setRequestHeader('Content-Type', 'multipart/form-data');
         xhr.sendAsBinary(atob(data));
 
         xhr.onreadystatechange = function () {
@@ -83,7 +83,7 @@
 
 
         }
-        upload(img, 'http://localhost:8000', 'a', 'b', function () {
+        upload(img, 'http://localhost:8000', function () {
             alert(1);
         })
     }
